@@ -11,7 +11,7 @@ class GachaPage extends Component
     public array $banner = [];
 
     public int $roll_count = 0;
-    public int $coins = 10;
+    public int $coins = 0;
     public int $coinsSpend = 0;
     public int $ssrCaught = 0;
     public int $pitty = 180;
@@ -63,7 +63,7 @@ class GachaPage extends Component
 
     public function increaseCoins()
     {
-        $this->coins+= 100; 
+        $this->coins+= 1; 
     }
 
     public function rollCount($amount)
