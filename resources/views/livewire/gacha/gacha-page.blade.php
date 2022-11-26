@@ -7,46 +7,36 @@
         </header>
 
         <main class="mx-3 flex-col gap-6 justify-between">
-            <div class="flex items-center justify-center border w-full min-h-[325px] rounded-md">
-                @if($this->result == \App\Enum\Gacha\GachaRarityEnum::SSR()->value)
-                    <div class="bg-yellow-500 px-10 py-1 text-white rounded-md">
-                        SSR
-                    </div>
-                @endif
-
-                @if($this->result == \App\Enum\Gacha\GachaRarityEnum::SR()->value)
-                    <div class="bg-purple-500 px-10 py-1 text-white rounded-md">
-                        SR
-                    </div>
-                @endif
-
-                @if($this->result == \App\Enum\Gacha\GachaRarityEnum::R()->value)
-                    <div class="bg-blue-500 px-10 py-1 text-white rounded-md">
-                        R
-                    </div>
-                @endif
-
-                @if($this->result == \App\Enum\Gacha\GachaRarityEnum::UC()->value)
-                    <div class="bg-gray-400 px-10 py-1 text-white rounded-md">
-                        UC
-                    </div>
-                @endif
-
-                @if($this->result == \App\Enum\Gacha\GachaRarityEnum::C()->value)
-                    <div class="bg-green-500 px-10 py-1 text-white rounded-md">
-                        C
-                    </div>
-                @endif
+            <div 
+            wire:poll.1000="increaseCoins()"
+            class="px-8 border w-full min-h-[325px] rounded-md py-6">
+                @include('livewire.gacha.gacha-component.description-component.description')
             </div>
+            
             <div class="mt-5 flex items-center justify-center gap-4">
-                <button 
-                wire:click="roll(1)"
-                class="bg-blue-400 px-10 md:px-20 py-3 hover:bg-blue-500 rounded-md text-white font-Roboto">
-                    Roll 1x
-                </button>
-                <div class="bg-blue-300 px-10 md:px-20 py-3 rounded-md text-white font-Roboto cursor-not-allowed select-none">
-                    Roll 10x
-                </div>
+                @if($this->coins < 10)
+                    <div class="bg-blue-300 px-10 md:px-20 py-3 rounded-md text-white font-Roboto cursor-not-allowed select-none">
+                        Roll 1x
+                    </div>
+                @else
+                    <button 
+                    wire:click="roll(1)"
+                    class="bg-blue-400 px-10 md:px-20 py-3 hover:bg-blue-500 rounded-md text-white font-Roboto">
+                        Roll 1x
+                    </button>
+                @endif
+
+                @if($this->coins < 100)
+                    <div class="bg-blue-300 px-10 md:px-20 py-3 rounded-md text-white font-Roboto cursor-not-allowed select-none">
+                        Roll 10x
+                    </div>
+                @else
+                    <button 
+                    wire:click="roll(10)"
+                    class="bg-blue-400 px-10 md:px-20 py-3 hover:bg-blue-500 rounded-md text-white font-Roboto">
+                        Roll 10x
+                    </button>
+                @endif
             </div>
         </main>
     </section>

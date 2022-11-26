@@ -19,7 +19,7 @@
 
 <body class="bg-gray-200">
     @livewireScripts
-
+    @livewire('livewire-ui-modal')
     @yield('body')
 </body>
 </html>
